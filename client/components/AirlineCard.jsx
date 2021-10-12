@@ -55,26 +55,26 @@ const AirlineCard = (props) => {
   }, [props])
 
   return (
-    <div className="card" >
+    <div className="card" onMouseOver={() => {
+      hoverHandler();
+    }} onMouseOut={() => {
+      hoverRelease();
+    }}>
       <div className="card_details" >
         <img src={'https://www.kayak.com' + props.airline.logoURL} className="card_img" />
         {/* Default View */}
-        <div className="card_description" style={normalState} onMouseOver={() => {
-          hoverHandler();
-        }}>
+        <div className="card_description" style={normalState} >
           <p className="card_details_name">{props.airline.name}</p>
         </div>
         {/* Hovered View */}
-        <div className="card_details_description" style={detailState} onMouseOut={() => {
-          hoverRelease();
-        }}>
+        <div className="card_details_description" style={detailState} >
           <p className="card_details_name">{props.airline.name}</p>
           {alliance}
           <p className="card_details_phone">{props.airline.phone}</p>
           <a href={props.airline.site} className="card_details_site">{website}</a>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 
