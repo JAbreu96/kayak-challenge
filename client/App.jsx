@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navigation from './components/Navigation.jsx';
 import AirlineWindow from './components/AirlineWindow.jsx';
-import Airlines from './components/Airlines.jsx';
 import '!style-loader!css-loader!bootstrap/dist/css/bootstrap.css';
 // let main = require('./main.css');
 import main from './main.css';
