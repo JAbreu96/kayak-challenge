@@ -33,43 +33,47 @@ const AirlineCard = (props) => {
   let website = processSite(props.airline.site);
   let alliance = processAlliance(props.airline.alliance);
 
-  //Hover Conditional Elements
-  const onHover = <div className="card_details_description" onMouseOut={() => {
-    hoverRelease();
-  }}>
-    <p className="card_details_name">{props.airline.name}</p>
-    {alliance}
-    <p className="card_details_phone">{props.airline.phone}</p>
-    <a href={props.airline.site} className="card_details_site">{website}</a>
-  </div>
-
-  const outHover = <div className="card_description" onMouseOver={() => {
-    hoverHandler();
-  }}>
-    <p className="card_details_name">{props.airline.name}</p>
-  </div>
+  const hide = { display: "none" };
+  const show = { display: "flex" };
 
   //Hover Hooks
-  const [detail, updateDetail] = useState(<></>);
-  const [normalState, updateState] = useState(outHover);
+  const [normalState, updateState] = useState(show);
+  const [detailState, updateDetail] = useState(hide);
 
   // Hover Handlers
   let hoverHandler = () => {
-    updateState(<></>);
-    updateDetail(onHover);
+    updateState(hide);
+    updateDetail(show);
   }
 
   let hoverRelease = () => {
-    updateState(outHover);
-    updateDetail(<></>);
+    updateState(show);
+    updateDetail(hide);
   }
+
+  useEffect(() => {
+    console.log('trigger');
+  }, [props])
 
   return (
     <div className="card" >
       <div className="card_details" >
         <img src={'https://www.kayak.com' + props.airline.logoURL} className="card_img" />
-        {normalState}
-        {detail}
+        {/* Default View */}
+        <div className="card_description" style={normalState} onMouseOver={() => {
+          hoverHandler();
+        }}>
+          <p className="card_details_name">{props.airline.name}</p>
+        </div>
+        {/* Hovered View */}
+        <div className="card_details_description" style={detailState} onMouseOut={() => {
+          hoverRelease();
+        }}>
+          <p className="card_details_name">{props.airline.name}</p>
+          {alliance}
+          <p className="card_details_phone">{props.airline.phone}</p>
+          <a href={props.airline.site} className="card_details_site">{website}</a>
+        </div>
       </div>
     </div >
   )
