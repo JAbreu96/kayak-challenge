@@ -1,34 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
 
 //String Functions
 let processSite = (str) => {
-  str = str.replace('https://', '').replace('http://', '');
-  str = str.replace('www.', '');
-  str = str.split('/');
+  str = str.replace("https://", "").replace("http://", "");
+  str = str.replace("www.", "");
+  str = str.split("/");
   return str[0];
-}
+};
 
 let processAlliance = (str) => {
   let alliance;
-  if (str === 'ST') {
-    alliance = <p className="card_details_alliance">Sky Team</p>
+  if (str === "ST") {
+    alliance = <p className="card_details_alliance">Sky Team</p>;
   }
-  if (str === 'OW') {
-    alliance = <p className="card_details_alliance">One World</p>
+  if (str === "OW") {
+    alliance = <p className="card_details_alliance">One World</p>;
   }
-  if (str === 'SA') {
-    alliance = <p className="card_details_alliance">Star Alliance</p>
+  if (str === "SA") {
+    alliance = <p className="card_details_alliance">Star Alliance</p>;
   }
-  if (str === 'none') {
-    alliance = <p className="card_details_alliance"></p>
+  if (str === "none") {
+    alliance = <p className="card_details_alliance"></p>;
   }
 
   return alliance;
-}
+};
 
 const AirlineCard = (props) => {
-  const [url, updateUrl] = useState('');
+  const [url, updateUrl] = useState("");
   //Web site String processing
   let website = processSite(props.airline.site);
   let alliance = processAlliance(props.airline.alliance);
@@ -75,8 +74,8 @@ const AirlineCard = (props) => {
           <a href={props.airline.site} className="card_details_site">{website}</a>
         </div>
       </div>
-    </div >
-  )
-}
+    </div>
+  );
+};
 
 export default AirlineCard;
