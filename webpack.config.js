@@ -16,6 +16,17 @@ module.exports = {
         }
       },
       {
+        test: /\.(png|jp(e*)g|svg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'images/[hash]-[name].[ext]',
+            },
+          },
+        ],
+      },
+      {
         test: /\.css$/,
         use: [
           {
@@ -24,7 +35,7 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
+              modules: false,
               sourceMap: true,
             },
           },
