@@ -5,15 +5,15 @@ import loadMore from "../assets/chevron-circle-down-solid.svg"
 
 const AirlineWindow = (props) => {
   let airlines = props.airlines;
-
   let filterValues = [];
-
+  
+  //List Hooks
   const [list, newList] = useState([]);
+  //Limit for cards on page
   const [limiter, updateLimit] = useState(16);
   //FILTER ALLIANCE HANDLER
   let filter = (allianceType, checked) => {
     //filter the airlines with specified alliance
-    //check if checked is false
     if (checked) {
       filterValues.push(allianceType);
     } else {
@@ -35,10 +35,12 @@ const AirlineWindow = (props) => {
     updateLimit(16);
   }
 
+  //updates limiter
   let loadHandler = (int) => {
     updateLimit(limiter + 16);
   };
 
+  
   useEffect(() => {
     newList(airlines);
   }, [airlines]);
@@ -80,10 +82,21 @@ const AirlineWindow = (props) => {
           })
         }
       </div>
-      <div className="load" onClick={() => {
-        loadHandler(limiter);
-      }}>
-        <img src={loadMore} className="load_icon" />
+      <div className="more">
+        <div className="load" onClick={() => {
+          loadHandler(limiter);
+        }}>
+          <p>Load More</p>
+          <img src="https://img.icons8.com/plumpy/24/000000/circled-chevron-down--v2.png" />
+        </div>
+        <div className="top" onClick={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          })
+        }}>
+          <p>Back To Top</p>
+        </div>
       </div>
 
     </section>

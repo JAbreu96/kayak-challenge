@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+//String Functions
 let processSite = (str) => {
   str = str.replace('https://', '').replace('http://', '');
   str = str.replace('www.', '');
@@ -28,49 +29,49 @@ let processAlliance = (str) => {
 
 const AirlineCard = (props) => {
   const [url, updateUrl] = useState('');
-
   //Web site String processing
   let website = processSite(props.airline.site);
   let alliance = processAlliance(props.airline.alliance);
 
-  //Hover Methods
-  const onHover = <div className="card_details_description">
+  //Hover Conditional Elements
+  const onHover = <div className="card_details_description" onMouseOut={() => {
+    hoverRelease();
+  }}>
     <p className="card_details_name">{props.airline.name}</p>
     {alliance}
     <p className="card_details_phone">{props.airline.phone}</p>
     <a href={props.airline.site} className="card_details_site">{website}</a>
   </div>
 
-  const outHover = <div className="card_description">
+  const outHover = <div className="card_description" onMouseOver={() => {
+    hoverHandler();
+  }}>
     <p className="card_details_name">{props.airline.name}</p>
   </div>
 
-  const [detail, updateDetail] = useState(<div></div>);
+  //Hover Hooks
+  const [detail, updateDetail] = useState(<></>);
   const [normalState, updateState] = useState(outHover);
 
   // Hover Handlers
   let hoverHandler = () => {
-    updateState(<div></div>);
+    updateState(<></>);
     updateDetail(onHover);
   }
 
   let hoverRelease = () => {
     updateState(outHover);
-    updateDetail(<div></div>);
+    updateDetail(<></>);
   }
 
   return (
-    <div className="card" onMouseOver={() => {
-      hoverHandler();
-    }} onMouseOut={() => {
-      hoverRelease();
-    }}>
-      <div className="card_details">
+    <div className="card" >
+      <div className="card_details" >
         <img src={'https://www.kayak.com' + props.airline.logoURL} className="card_img" />
         {normalState}
         {detail}
       </div>
-    </div>
+    </div >
   )
 }
 
